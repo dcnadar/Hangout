@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import mongoose from 'mongoose'
 import helmet, { crossOriginResourcePolicy } from 'helmet'
 import { fileURLToPath } from 'url'
+import  register from './controller/auth.js'
 dotenv.config()
 
 //This is to find the directory name of this file
@@ -62,3 +63,5 @@ mongoose
         
     })
 
+// uploading file in the backend
+    app.post('/auth/register', upload.single('image'), register);
