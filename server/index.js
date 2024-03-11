@@ -10,6 +10,7 @@ import helmet, { crossOriginResourcePolicy } from 'helmet'
 import { fileURLToPath } from 'url'
 import  register from './controller/auth.js'
 dotenv.config()
+import authRoutes from './routes/auth.js'
 
 //This is to find the directory name of this file
 const __filename = fileURLToPath(import.meta.url)
@@ -64,4 +65,8 @@ mongoose
     })
 
 // uploading file in the backend
+// only this route is directly made here because
     app.post('/auth/register', upload.single('image'), register);
+
+// creating routes for the others
+   app.post('/auth', authRoutes)

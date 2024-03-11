@@ -29,7 +29,7 @@ const user_schema = new mongoose.Schema(
             unique:true,
             max:50
         },
-        picturePath:{
+        profilePhoto:{
             type:String,
             default:'',
 
@@ -41,6 +41,7 @@ const user_schema = new mongoose.Schema(
         },
         location:String,
         occupation:String,
+        gender:String,
         viewedProfile: Number,
         impression:Number
     },
