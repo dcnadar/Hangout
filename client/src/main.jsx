@@ -18,10 +18,16 @@ from 'redux-persist'
 
 import App from './App.jsx'
 import './index.css';
-
+const store = configureStore({
+  reducer:{
+    counter:authReducer
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
   <React.StrictMode>
     <App />
   </React.StrictMode>,
+  </Provider>
 )
