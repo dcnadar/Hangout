@@ -1,4 +1,4 @@
-import { ApiError } from "../ApiError";
+import { ApiError } from "../ApiError.js";
 
 
 export default async function verifyjwt(req,res,next)
