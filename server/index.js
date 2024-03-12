@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import bodyParser from 'body-parser'
-import multer from 'multer'
+import upload from './middleware/multer.js'
 import cors from 'cors'
 import path from 'path'
 import morgan from 'morgan'
@@ -11,6 +11,9 @@ import { fileURLToPath } from 'url'
 import  register from './controller/auth.js'
 dotenv.config()
 import authRoutes from './routes/auth.js'
+import userRoutes from './routes/userroutes.js'
+import cookieParser from 'cookie-parser'
+
 
 //This is to find the directory name of this file
 const __filename = fileURLToPath(import.meta.url)
@@ -26,22 +29,11 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended:true}))
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')))
 app.use(morgan("common"))
 app.use(cors())
+app.use(cookieParser())
 app.use(helmet.crossOriginResourcePolicy({policy:'cross-origin'}))
 
 // file storage  storing in the  public/assets
-
-const storage= multer.diskStorage(
-    {
-        destination: (req,file,cb)=>
-        {
-         cb(null, 'public/assets')
-        },
-        filename:(req,file, cb)=>
-        {
-            cb(null, file.originalname)
-        }}); 
-        
-const upload = multer({storage})
+//you will find this in the multer file middleware folder
 
 const PORT = process.env.PORT || 6001;
 console.log(process.env.MONGO_URL);
@@ -69,4 +61,8 @@ mongoose
     app.post('/auth/register', upload.single('image'), register);
 
 // creating routes for the others
-   app.post('/auth', authRoutes)
+   app.use('/auth', authRoutes)
+
+//creating the routes for the user getfriend removefriend and other 
+
+app.use('/users', userRoutes)

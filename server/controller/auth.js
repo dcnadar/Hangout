@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import User from "../models/user.js"
 import { ApiError } from "../ApiError.js";
 import fs from 'fs'
+import cookieParser from 'cookie-parser';
 dotenv.config()
 
 import cloudinary from 'cloudinary'
@@ -37,7 +38,6 @@ export default  async function  register(req,res)
          {
                 if (err) console.log('Error deleting file:', err)
          }) 
-
 // creating creating new user inthe database collection 
        
   const x=  await User.create({...req.body,password:bcryptPassword,profilePhoto:imageurl.url, lastname:'singh',impression:Math.floor(Math.random(90)*1000), viewedProfile:Math.floor(Math.random(20)*1000)})
@@ -56,4 +56,45 @@ export default  async function  register(req,res)
                 return res.status(500).json(err)
 
     }
+} 
+
+
+
+export  async function login(req,res)
+{
+     try
+     {
+        const {key, password}= req.body
+        console.log('hji yeh auth.js pr h abhi');
+        
+        console.log('req.body', req.body);
+        
+        const userData=  await User.findOne({$or:[{username:key}, {email:key}]})
+         if(!userData)
+         {
+           throw new ApiError(404, 'Data not found for your input')
+         }
+
+        const passwordCheck=  await userData.isPasswordCorrect(password)
+         if(!passwordCheck)
+         {
+            throw new ApiError(401, 'password is incorrect')
+         }
+
+         const Accesstoken=  await userData.creataAcessToken()
+         if(!Accesstoken)
+         {
+            return res.error('Unable to genrate the Accesstoken')
+         }
+
+         res.cookie('token',Accesstoken)
+          res.status(200).json({message:"sucess", data:"you are verified and sucessfully login"})
+
+     }
+     catch(err)
+     {
+          console.log('this is the error', err)
+           res.status(err.status).json(err)
+
+     }
 }
