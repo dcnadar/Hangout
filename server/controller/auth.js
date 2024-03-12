@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import User from "../models/user.js"
 import { ApiError } from "../ApiError.js";
 import fs from 'fs'
-import cookieParser from 'cookie-parser';
 dotenv.config()
 
 import cloudinary from 'cloudinary'

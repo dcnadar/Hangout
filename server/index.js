@@ -9,7 +9,7 @@ import mongoose from 'mongoose'
 import helmet, { crossOriginResourcePolicy } from 'helmet'
 import { fileURLToPath } from 'url'
 import  register from './controller/auth.js'
-import  createPost from './controller/createpost.js'
+import  {createPost} from './controller/createpost.js'
 
 dotenv.config()
 import authRoutes from './routes/auth.js'
