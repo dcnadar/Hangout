@@ -9,10 +9,14 @@ import mongoose from 'mongoose'
 import helmet, { crossOriginResourcePolicy } from 'helmet'
 import { fileURLToPath } from 'url'
 import  register from './controller/auth.js'
+import  createPost from './controller/createpost.js'
+
 dotenv.config()
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/userroutes.js'
+import postRoutes from './routes/postroutes.js'
 import cookieParser from 'cookie-parser'
+import verifyjwt from './middleware/verifyjwt.js'
 
 
 //This is to find the directory name of this file
@@ -59,6 +63,7 @@ mongoose
 // uploading file in the backend
 // only this route is directly made here because
     app.post('/auth/register', upload.single('image'), register);
+    app.post('/posts', verifyjwt, upload.single('image'), createPost)
 
 // creating routes for the others
    app.use('/auth', authRoutes)
@@ -66,3 +71,4 @@ mongoose
 //creating the routes for the user getfriend removefriend and other 
 
 app.use('/users', userRoutes)
+app.use('/posts',  postRoutes)

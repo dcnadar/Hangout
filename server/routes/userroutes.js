@@ -7,7 +7,6 @@ import {
 } from '../controller/user.js'
 
 import verifyjwt from "../middleware/verifyjwt.js";
-import { deflateSync } from "zlib";
 
 const router= express.Router()
 
