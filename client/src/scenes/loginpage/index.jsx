@@ -7,6 +7,7 @@ import { setLogin } from '../../states'
 import { useDispatch } from 'react-redux'
 
 
+
 export default function LoginPage() {
 
 const {register, handleSubmit, reset, formState:{errors, isSubmitting}}= useForm()
@@ -36,6 +37,9 @@ const onsubmit= async (data)=>
                     token:response.data.Accesstoken,
                   })
                  );
+                 console.log('now the home route should work')
+
+                
                 navigate('/home')
           }
 

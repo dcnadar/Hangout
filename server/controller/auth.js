@@ -25,6 +25,8 @@ export default  async function  register(req,res)
      
         if(req.file)
         {
+          console.log('req.file is this', req.file);
+          
           const filepath= req.file.path
     
          if(!filepath)

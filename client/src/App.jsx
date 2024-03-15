@@ -1,24 +1,23 @@
 import { useState } from 'react'
 import HomePage from './scenes/hompage'
 import LoginPage from './scenes/loginpage'
-import Navbar from './scenes/navbar'
 import Register from './scenes/registerpage'
 import ProfilePage from './scenes/profilepage'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import './App.css'
 
 function App() {
+
+  const isauth= Boolean(useSelector((state)=> state.token))
+
 const routes= createBrowserRouter(
 [
   
   {
-    path:'/login',
-    element:<LoginPage/>
-  },
-  {
     path:'/',
-    element:<ProfilePage/>
+    element:<LoginPage/>
   },
   {
     path:'/register',
@@ -27,7 +26,7 @@ const routes= createBrowserRouter(
 
   {
     path:'/home',
-    element:<HomePage/>
+    element:isauth ?<HomePage/>: <LoginPage/>
   },
   {
     path:'/profile/:userId',
@@ -41,7 +40,6 @@ const routes= createBrowserRouter(
   return (
     <>
     <RouterProvider router={routes}>
-    <div className='border-2 border-solid  border-red-600'>hnji kya hal </div>
     </RouterProvider>
 
     </>
@@ -49,4 +47,3 @@ const routes= createBrowserRouter(
 }
 
 export default App
-// border-2 border-solid  border-red-600

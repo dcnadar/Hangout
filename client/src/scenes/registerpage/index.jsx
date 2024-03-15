@@ -31,7 +31,7 @@ const onsubmit= async (data)=>
           console.log('this is the respose', response)
           if(response)
           {
-                navigate('/login')
+                navigate('/')
           }
 
         }
@@ -90,7 +90,7 @@ const onsubmit= async (data)=>
 
 
       <button type="submit" className="bg-sky-500 w-full mb-2 rounded-md text-white p-2">Submit</button>
-       <Link to="/login">already have the account</Link>
+       <Link to="/">already have the account</Link>
     </form>
         </div>
       </div>
