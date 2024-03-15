@@ -1,26 +1,15 @@
 import React from 'react'
-
 import ReactDOM from 'react-dom/client'
-import authReducer from './states'
+import authReducer from './states/index.js'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-import {
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  REGISTER,
-  PURGE,
-  persistReducer
-}
-from 'redux-persist'
 
 
 import App from './App.jsx'
 import './index.css';
 const store = configureStore({
   reducer:{
-    counter:authReducer
+    auth:authReducer
   }
 })
 
@@ -28,6 +17,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
   </Provider>
 )

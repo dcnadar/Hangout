@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 // 01 this is like usuall the state  like use state varible you can change state of under inital state object  from anywhere using the reducers
-const intialState={
+const initialState={
     mode:'light',
     user:null,
     token:null,
@@ -10,7 +10,7 @@ const intialState={
 export const authSlice= createSlice(
    {
     name: "auth",
-    intialState,
+    initialState,
     // 02 reducer is a function only nothing much 
     reducers: 
     {

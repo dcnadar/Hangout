@@ -32,7 +32,13 @@ app.use(bodyParser.json({limit: "30mb", extended:true}))
 app.use(bodyParser.urlencoded({limit: "30mb", extended:true}))
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')))
 app.use(morgan("common"))
-app.use(cors())
+app.use(cors(
+    {
+        origin:"http://localhost:5173",
+        credentials:true,
+        methods:["PUT", "DELETE", "POST", "GET"]
+    }
+))
 app.use(cookieParser())
 app.use(helmet.crossOriginResourcePolicy({policy:'cross-origin'}))
 
@@ -59,10 +65,21 @@ mongoose
         console.log(err);
         
     })
+ 
+    // const x= (req,res,next)=>
+    // {
+    //     console.log('hey');
+    //     console.log('req.body', req.body);
+    //     console.log('req.form', req.form);
+        
+        
+    //     next
+
+    // }
 
 // uploading file in the backend
 // only this route is directly made here because
-    app.post('/auth/register', upload.single('image'), register);
+    app.post('/auth/register',  upload.single('image'), register);
     app.post('/posts', verifyjwt, upload.single('image'), createPost)
 
 // creating routes for the others

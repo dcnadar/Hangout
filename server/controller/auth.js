@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 import User from "../models/user.js"
 import { ApiError } from "../ApiError.js";
+import cookieParser from 'cookie-parser';
 import fs from 'fs'
 dotenv.config()
 
@@ -15,19 +16,25 @@ cloudinary.config({
 export default  async function  register(req,res)
  {
     try
-    {   
-         const filepath= req.file.path
-
-// encrypting the password into random string using bcrypt package
-        const bcryptPassword=  await bcrypt.hash(req.body.password, 10)
+    {   console.log('this is the req.body ', req.body)
+             
+        let imageurl
+    
+    // encrypting the password into random string using bcrypt package
+    const bcryptPassword=  await bcrypt.hash(req.body.password, 10)
+     
+        if(req.file)
+        {
+          const filepath= req.file.path
+    
          if(!filepath)
          {
                 throw new ApiError(500,'filepath did not exist')
          }
-       const imageurl=   await cloudinary.uploader.upload(filepath,{resource_type:"auto"})
+       const imageurls=   await cloudinary.uploader.upload(filepath,{resource_type:"auto"})
 
-        
-       if(!imageurl)
+         imageurl= imageurls.url
+       if(!imageurls)
              {
                     throw new ApiError(500,'cannot able to upload on cloudinary')
              }
@@ -37,9 +44,11 @@ export default  async function  register(req,res)
          {
                 if (err) console.log('Error deleting file:', err)
          }) 
-// creating creating new user inthe database collection 
+// creating creating new user inthe database collection
+        }
+          
        
-  const x=  await User.create({...req.body,password:bcryptPassword,profilePhoto:imageurl.url, lastname:'singh',impression:Math.floor(Math.random(90)*1000), viewedProfile:Math.floor(Math.random(20)*1000)})
+  const x=  await User.create({...req.body,password:bcryptPassword,profilePhoto:imageurl, lastname:'singh',impression:Math.floor(Math.random(90)*1000), viewedProfile:Math.floor(Math.random(20)*1000)})
       if(!x)
       {
         console.log('unable to cer');
@@ -80,20 +89,20 @@ export  async function login(req,res)
             throw new ApiError(401, 'password is incorrect')
          }
 
-         const Accesstoken=  await userData.creataAcessToken()
+         const Accesstoken=  await userData.createAcessToken()
          if(!Accesstoken)
          {
             return res.error('Unable to genrate the Accesstoken')
          }
-
+          console.log(Accesstoken)
          res.cookie('token',Accesstoken)
-          res.status(200).json({message:"sucess", data:"you are verified and sucessfully login"})
+          res.status(200).json({message:"sucess", userData, Accesstoken})
 
      }
      catch(err)
      {
           console.log('this is the error', err)
-           res.status(err.status).json(err)
+           res.status(500).json(err)
 
      }
 }

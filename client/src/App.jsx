@@ -2,6 +2,7 @@ import { useState } from 'react'
 import HomePage from './scenes/hompage'
 import LoginPage from './scenes/loginpage'
 import Navbar from './scenes/navbar'
+import Register from './scenes/registerpage'
 import ProfilePage from './scenes/profilepage'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
@@ -12,9 +13,18 @@ const routes= createBrowserRouter(
 [
   
   {
-    path:'/',
+    path:'/login',
     element:<LoginPage/>
   },
+  {
+    path:'/',
+    element:<ProfilePage/>
+  },
+  {
+    path:'/register',
+    element:<Register/>
+  },
+
   {
     path:'/home',
     element:<HomePage/>
@@ -31,9 +41,7 @@ const routes= createBrowserRouter(
   return (
     <>
     <RouterProvider router={routes}>
-
-
-    <div className='border-2 border-solid  border-red-600'>hnji kya hal h     </div>
+    <div className='border-2 border-solid  border-red-600'>hnji kya hal </div>
     </RouterProvider>
 
     </>
