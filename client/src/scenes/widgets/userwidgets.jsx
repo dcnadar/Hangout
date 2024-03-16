@@ -33,7 +33,7 @@ const x=0
   return (
  <div >
 
-      <div className='w-[23vw] bg-white rou nded-2xl   p-1 mt-8 ml-12 '>
+      <div className='w-[23vw] bg-white rounded-2xl   p-1 mt-8 ml-12 '>
 
 <div className='ml-2 m-4 text-sm  border-3'>
 

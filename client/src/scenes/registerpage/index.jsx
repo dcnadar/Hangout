@@ -9,11 +9,7 @@ import { Link } from 'react-router-dom'
 export default function Register() {
 
 const {register, handleSubmit, reset, formState:{errors, isSubmitting}}= useForm()
-const navigate= useNavigate()
-const [filename, setfilename]=useState('')
-useEffect(()=>{
-  console.log(filename)
-},[filename])
+const navigate= useNavigate() 
 const onsubmit= async (data)=>
 {
         try{
