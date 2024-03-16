@@ -70,10 +70,7 @@ mongoose
     // {
     //     console.log('hey');
     //     console.log('req.body', req.body);
-    //     console.log('req.form', req.form);
-        
-        
-    //     next
+  
 
     // }
 

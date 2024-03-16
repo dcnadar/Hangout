@@ -4,6 +4,7 @@ export const  getUser= async (req,res)=>
 {
      try
      {
+      console.log(req.params)
         const {id}= req.params;
         const user= await User.findById(id)
         res.status(200).json(user)

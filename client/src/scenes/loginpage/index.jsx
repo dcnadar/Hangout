@@ -69,7 +69,8 @@ const onsubmit= async (data)=>
 
       <input type="text"   placeholder='password' {...register("password", {required:{value: true , message:"password is required"}, minLength:{value:6, message:"should be atleast 8 alphabet"}, pattern:{value:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$/,message:"must contain uppercase ,lowercase ,number and special key"}})} className="border w-full p-2 border-zinc-600 bg-zinc-800 my-4  h-10 rounded-md" />
 
-      {errors.password && <div className=' text-red-600 text-sm'> {error.password.message}</div>}
+      {errors.password && <div className=' text-red-600 text-sm'> {errors.password.message}</div>}
+
 
 
 
