@@ -1,24 +1,33 @@
 import Post from '../models/post.js'
 import { ApiError } from '../ApiError.js'
 import User from '../models/user.js'
+import cloudinary from 'cloudinary'
+import fs from 'fs'
 
 
 export const createPost = async (req,res)=>
 {
     try
-    {   
+    {    console.log('hn bhia ueh abhi createpost pr aa gaya h ')
         const {userId, description, profilePhoto}= req.body
-        const filepath= req.file.path
+        console.log( 'this is the req.body', req.body)
+        console.log('hnji yeh line 13 h bhai', req.file.path);
 
-         if(!filepath)
+        const filepath= req.file.path
+           
+        console.log('this is the filepath', filepath)
+         if( filepath === undefined)
          {
                 throw new ApiError(500,'filepath did not exist')
          }
-
-        const imageurl=   await cloudinary.uploader.upload(filepath,{resource_type:"auto"})
+       console.log('hnji yaha pr hu 21');
 
         
-        if(!imageurl)
+          const imageurl=   await cloudinary.uploader.upload(filepath,{resource_type:"auto"})
+
+
+            console.log('this is the imageurl', imageurl.url)
+            if(!imageurl)
               {
                      throw new ApiError(500,'cannot able to upload on cloudinary')
               }
@@ -28,8 +37,13 @@ export const createPost = async (req,res)=>
           {
                  if (err) console.log('Error deleting file:', err)
           }) 
+console.log('hnji ab m 39 pr hu');
+      console.log('this is the userid', userId)
 
-        const user = await User.findById(userId)
+    const user = await User.findById(userId)
+    console.log('this is the user', user)
+
+        
         const newpost= new Post(
             {
                 userId,
@@ -44,15 +58,16 @@ export const createPost = async (req,res)=>
             }
           )
 
-        await newpost.save()
         const post= await Post.find();
+        console.log(post)
         // all the post are send to the frondend one
           res.status(201).json(post)
 
     }
     catch(err)
     {
-       res.status(409).json({message:err.message})
+        console.log(err)
+       res.status(409).json(err)
     }
 
 }

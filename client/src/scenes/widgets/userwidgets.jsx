@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 export default  function  UserWidgets (props) {
  
   const [user, setuser]= useState({})
+  
   useEffect(()=>
   {
   (async()=>

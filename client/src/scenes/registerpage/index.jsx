@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 export default function Register() {
 
 const {register, handleSubmit, reset, formState:{errors, isSubmitting}}= useForm()
+const [filename, setfilename]=useState()
 const navigate= useNavigate() 
 const onsubmit= async (data)=>
 {
@@ -22,6 +23,8 @@ const onsubmit= async (data)=>
           formData.append('password', data.password)
           formData.append('location', data.location)
           formData.append('occupation',data.occupation)
+          console.log('this is the image data.image', data.image)
+          console.log('this is what i am sending to the backend ', data.image[0])
 
           const response= await axios.post('http://localhost:3000/auth/register', formData)
           console.log('this is the respose', response)
