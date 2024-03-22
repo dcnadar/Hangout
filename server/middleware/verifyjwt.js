@@ -5,7 +5,9 @@ export default async function verifyjwt(req,res,next)
 {
           try
           {
-            let token  =  req.header('Authorization')
+            let token  =  req.header('Authorization')||req.body
+
+      
 
 
             let body= req.body

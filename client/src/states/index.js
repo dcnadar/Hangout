@@ -49,7 +49,7 @@ export const authSlice= createSlice(
          
          setPosts:(state, action)=>
          {
-            state.posts=state.payload.posts
+            state.posts=action.payload.posts
 
          },
 
@@ -59,9 +59,9 @@ export const authSlice= createSlice(
             if(post.id===  action.payload.id) return action.payload.post
 
             return post
-
-            state.posts= updatedposts
-           })
+            
+         })
+         state.posts= updatedposts
 
          }
 

@@ -59,7 +59,7 @@ console.log('hnji ab m 39 pr hu');
           )
 
         const post= await Post.find();
-        console.log(post)
+        console.log(post, 'this is the all post')
         // all the post are send to the frondend one
           res.status(201).json(post)
 
@@ -76,8 +76,11 @@ console.log('hnji ab m 39 pr hu');
 export const getFeedPosts = async (req,res)=>
 {
     try{
+        console.log('we are now in the getfeed post  controller');
+        
         const post= await Post.find()
        res.status(201).json(post)
+
     }
     catch(err)
     {

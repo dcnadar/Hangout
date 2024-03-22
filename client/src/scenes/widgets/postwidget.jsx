@@ -51,11 +51,12 @@ console.log('this is the filedata', filedata)
 }
 
   return (
-
-    <div className='absolute left-[28vw] top-[12vh]'>
   
 
-        <div className='m-3 p-4 rounded-xl bg-white w-[45vw]'>
+    <div className='inline-block  align-top mt-8 ml-3 '>
+  
+
+        <div className=' p-4 rounded-xl bg-white w-[45vw]'>
             <form onSubmit={handleSubmit}>
 
      <div>
