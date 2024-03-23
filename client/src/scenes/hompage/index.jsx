@@ -11,9 +11,9 @@ export default function HomePage() {
 
 
   return (
-    <div  className='bg-neutral-300'>
+    <div  className='bg-neutral-300  '>
       <Navbar/>
-      <section className='flex'>
+      <section className='flex h-full'>
 
     <Userwidgets userId={_id}   profilePhoto={profilePhoto}/>
 <div className='flex-col '>

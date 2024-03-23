@@ -57,6 +57,8 @@ console.log('hnji ab m 39 pr hu');
                 comments:[]
             }
           )
+          
+         await newpost.save()
 
         const post= await Post.find();
         console.log(post, 'this is the all post')

@@ -17,29 +17,29 @@ const config = {
        }
      }; 
 
-     useEffect(()=>{
-        
-        ;(async()=>{
-            try {
-                const response =  await  axios.get(`http://localhost:3000/posts`, config)
-                console.log('this is the response we get', response.data)
-                dispatch(setPosts({posts:response.data}))
-
-            } catch (error) {
-                console.log('this is error found', error)
-                
-            }
-
-        })()
-     },[])
-
+     useEffect(() => {
+      const fetchPosts = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3000/posts`,
+            config
+          );
+          console.log('this is the response we get', response.data);
+          dispatch(setPosts({ posts: response.data }));
+        } catch (error) {
+          console.log('this is error found', error);
+        }
+      };
+  
+      fetchPosts();
+    }, [userId, token, dispatch]);
 
      
 
 
 console.log('this is the all post', posts )
   return (
-    <div className=' mt-4 ml-3 '>
+    <div className=' mt-2 ml-3  '>
     {posts.map((e)=>
     {
         console.log(e)

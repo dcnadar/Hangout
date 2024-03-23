@@ -4,7 +4,7 @@ export default function ShowPostwidget({postId,userId,location,description,name,
  {
     console.log(name,'this is the name')
   return (
-    <div className='inline-block'>
+    <div className='inline-block my-3'>
       
 
   
