@@ -50,7 +50,7 @@ export default  async function  register(req,res)
         }
           
        
-  const x=  await User.create({...req.body,password:bcryptPassword,profilePhoto:imageurl, lastname:'singh',impression:Math.floor(Math.random(90)*1000), viewedProfile:Math.floor(Math.random(20)*1000)})
+  const x=  await User.create({...req.body,password:bcryptPassword,profilePhoto:imageurl,impression:Math.floor(Math.random(90)*1000), viewedProfile:Math.floor(Math.random(20)*1000)})
       if(!x)
       {
         console.log('unable to cer');

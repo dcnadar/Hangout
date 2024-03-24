@@ -51,6 +51,9 @@ console.log('this is the filedata', filedata)
      const response =  await  axios.post(`http://localhost:3000/posts`,formData, config)
        console.log('this is the response we get', response)
        dispatch(setPosts({ posts: response.data }));
+       setfildata('')
+       setvisibility(false)
+
   } catch (error) {
     console.log('this is error found', error)
     
@@ -76,8 +79,8 @@ console.log('this is the filedata', filedata)
 
         {visiblily  &&      <div className='border-1 mt-4 bg-neutral-300 rounded-md w-full p-1 h-[70px]'>
                <div className='border-2 border-dashed rounded-lg     border-gray-700  h-[60px]'>
-                        <span className='ml-6 text-center' >Add image here</span>    
-                     <input type="file"   accept="image/"  name="image" onChange={(e)=> setfildata(e.target.files[0])}  className=' w-full h-full' />
+                        <span className='ml-6 text-center' >{filedata.name || 'Add the image'}</span>    
+                     <input type="file"   accept="image/"  name="image" onChange={(e)=> setfildata(e.target.files[0])}   className=' w-full  opacity-0 h-full' />
                </div>
         </div>  }
        

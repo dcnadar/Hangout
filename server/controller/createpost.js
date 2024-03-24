@@ -61,7 +61,6 @@ console.log('hnji ab m 39 pr hu');
          await newpost.save()
 
         const post= await Post.find();
-        console.log(post, 'this is the all post')
         // all the post are send to the frondend one
           res.status(201).json(post)
 
