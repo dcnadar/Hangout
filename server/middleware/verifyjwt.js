@@ -38,7 +38,7 @@ export default async function verifyjwt(req,res,next)
           catch(err)
           {
             console.log('error is  hn bhai direct yaha kaise encountered');
-            res.status(404).json(err.message)
+            res.status(404).json(err)
             
           }
 }

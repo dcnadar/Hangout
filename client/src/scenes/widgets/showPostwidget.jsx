@@ -1,8 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios'
+import { setFriends } from '../../states'
 
 export default function ShowPostwidget({postId,userId,location,description,name,picturePath,userPicturePath,likes,comments})
  {
+       const dispatch= useDispatch()
+   const user= useSelector(state=> state.user)
+   const token=useSelector(state=>state.token)
+   const friend= useSelector(state=>state.user.friends)
+   const [isfriend , setisfriend ]= useState()
+   const config = {
+    headers: {
+         'Authorization': `Bearer ${token}`,
+         'Content-Type': 'multipart/form-data'
+       }
+     }; 
+
+   
+   const handleclick= async ()=>
+   {
+    try {
+
+      
+       const response =  await  axios.patch(`http://localhost:3000/users/${user._id}/${userId}`)
+         console.log('this is the response we get', response.data)
+         await  dispatch(setFriends({friends: response.data}))
+
+
+         if(friend.includes(userId))
+         {
+           setisfriend(true)
+         }
+         else{
+          setisfriend(false)
+         }
+
+
+
+
+  
+    } catch (error) {
+      console.log('this is error found', error)
+      
+    }
+
+   }
     console.log(name,'this is the name')
+
+    const unfollow="../src/public/assets/follow.svg" 
+    const follow="../src/public/assets/friendAdded.svg"
+
+
   return (
     <div className='inline-block my-3'>
       
@@ -13,7 +62,7 @@ export default function ShowPostwidget({postId,userId,location,description,name,
 <div className='flex justify-between mb-3 items-center'>
 
         <div className='flex    gap-5 items-center'>
-          <img src={userPicturePath} alt="" className='w-14 h-14 rounded-full object-cover' />
+          <img src={userPicturePath} alt="" className='w-14 h-14  rounded-full object-cover' />
           <div className='text-gray-600'>
           <div>{name}</div>
           <div>{location}</div>
@@ -22,7 +71,7 @@ export default function ShowPostwidget({postId,userId,location,description,name,
 
 
       </div>
-          <img src="../src/public/assets/follow.svg" className='w-8 h-8 items-center' alt="" />
+          <img src={isfriend?follow:unfollow}  onClick={handleclick} className='w-8  h-8 cursor-pointer items-center' alt="" />
 
 </div>
 

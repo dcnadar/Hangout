@@ -41,18 +41,24 @@ export const addRemoveFriend= async (req,res)=>
 {
      try
      {
+      console.log('hnji bhai yeh add remove friend')
+      console.log(req.params)
         const {id}= req.params;
         const{friendId}=req.params
 
-        const user= User.findById(id)
-        const friend= User.findById(friendId)
+        const user= await  User.findById(id)
+        const friend= await User.findById(friendId)
 
         //to remove the friend from the user as the database is stored the friend database inside the key of friends
        if(user.friends.includes(friendId))
        {
-        user.friends= User.friends.filter((id)=> id!==friendId);
-        friend.friends= friend.friends.filter((id)=> id !==id)
+        user.friends= user.friends.filter((e)=> e!==friendId);
+        friend.friends= friend.friends.filter((e)=> e!==id)
        }
+      //  if(id === friendId)
+      //  {
+      //    return res.send("you cannot follow yourslef")
+      //  }
        // to add the friend in the list of the user so we have to do like this
          else
          {
@@ -64,10 +70,10 @@ export const addRemoveFriend= async (req,res)=>
 
          //to send the list in the formetted manner so that it easy for the frontend developer
 
-         const friends =  await Promise.all(User.friends.map((id)=> User.findById(id)))
-         console.log('this is the all friend of the user list', friends);
+         const friendss =  await Promise.all(user.friends.map((id)=> User.findById(id)))
+         console.log('this is the all friend of the user list', friendss);
 
-         const formattedfriend= friend.map(({_id,firstname, lastname,location, profilePicture,occupation})=>{return {_id,firstname, lastname,location, profilePicture,occupation}})
+         const formattedfriend= friendss.map(({_id,firstname, lastname,location, profilePicture,occupation})=>{return {_id,firstname, lastname,location, profilePicture,occupation}})
          
   
      return res.status(200).json(formattedfriend)
@@ -76,6 +82,7 @@ export const addRemoveFriend= async (req,res)=>
      catch(err)
      {
         console.log('this is the error from the addRemoveFriends controller')
-        res.status(err.status).json(err.message)
+        console.log(err)
+        res.status(err.status).json(err)
      }
 }

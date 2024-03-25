@@ -17,22 +17,22 @@ const config = {
        }
      }; 
 
-     useEffect(() => {
-      const fetchPosts = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:3000/posts`,
-            config
-          );
-          console.log('this is the response we get', response.data);
-          dispatch(setPosts({ posts: response.data }));
-        } catch (error) {
-          console.log('this is error found', error);
-        }
-      };
-  
-      fetchPosts();
-    }, [userId, token, dispatch]);
+     useEffect(()=>{
+        
+        ;(async()=>{
+            try {
+                const response =  await  axios.get(`http://localhost:3000/posts`, config)
+                console.log('this is the response we get', response.data)
+                dispatch(setPosts({posts:response.data}))
+
+            } catch (error) {
+                console.log('this is error found', error)
+                
+            }
+
+        })()
+     },[ dispatch])
+
 
      
 
@@ -47,7 +47,7 @@ console.log('this is the all post', posts )
 
         key={e._id}
         postId={e._id}
-        userId= {userId}
+        userId= {e.userId}
         location={e.location}
         description={e.description}
         name={`${e.firstname} ${e.lastname?e.lastname:''}`}

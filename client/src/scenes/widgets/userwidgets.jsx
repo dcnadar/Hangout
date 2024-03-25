@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default  function  UserWidgets (props) {
  
@@ -18,7 +19,7 @@ export default  function  UserWidgets (props) {
      };
 
      const response =  await  axios.get(`http://localhost:3000/users/${props.userId}`, config)
-       console.log(response.data)
+       console.log('this is the response of the user',response.data)
        setuser(response.data)
 
   })()
@@ -27,8 +28,8 @@ if(!user)
 {
   return null
 }
-
-const{firstname, lastname,occupation,friends, location, profilePhoto, impression, viewedProfile}= user
+const friends= useSelector(state=>state.user.friends)
+const{firstname, lastname,occupation, location, profilePhoto, impression, viewedProfile}= user
 const x=0
 
   return (
@@ -50,7 +51,7 @@ const x=0
                                   {firstname}  {lastname}
                               </div>
                               <div>
-                                  {friends} 0 friends
+                                  {friends?.length} friends
                              </div>
                   </div>
 

@@ -16,7 +16,7 @@ router.get('/:id/friends', verifyjwt, getUserFriends)
 
 //update
 
-router.patch('/:id/:friendId', verifyjwt, addRemoveFriend)
+router.patch('/:id/:friendId',addRemoveFriend)
 
 
 export  default router
