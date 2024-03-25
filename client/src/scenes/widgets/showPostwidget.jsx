@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { setFriends } from '../../states'
@@ -7,17 +7,19 @@ export default function ShowPostwidget({postId,userId,location,description,name,
  {
        const dispatch= useDispatch()
    const user= useSelector(state=> state.user)
-   const token=useSelector(state=>state.token)
    const friend= useSelector(state=>state.user.friends)
-   const [isfriend , setisfriend ]= useState()
-   const config = {
-    headers: {
-         'Authorization': `Bearer ${token}`,
-         'Content-Type': 'multipart/form-data'
-       }
-     }; 
+   const [isfriend , setisfriend ]= useState(false)
+useEffect(()=>
+{ if(friend.includes(userId))
+  {
+    setisfriend(true)
+  }
+  else{
+   setisfriend(false)
+  }
 
-   
+},[])
+    console.log('this  is the   first render isfirend', isfriend)
    const handleclick= async ()=>
    {
     try {
@@ -25,20 +27,10 @@ export default function ShowPostwidget({postId,userId,location,description,name,
       
        const response =  await  axios.patch(`http://localhost:3000/users/${user._id}/${userId}`)
          console.log('this is the response we get', response.data)
+         setisfriend(!isfriend)
          await  dispatch(setFriends({friends: response.data}))
-
-
-         if(friend.includes(userId))
-         {
-           setisfriend(true)
-         }
-         else{
-          setisfriend(false)
-         }
-
-
-
-
+         console.log('this is by default isfriend', isfriend)
+         console.log('this is after dispatch isfriend', isfriend)
   
     } catch (error) {
       console.log('this is error found', error)
@@ -46,7 +38,7 @@ export default function ShowPostwidget({postId,userId,location,description,name,
     }
 
    }
-    console.log(name,'this is the name')
+
 
     const unfollow="../src/public/assets/follow.svg" 
     const follow="../src/public/assets/friendAdded.svg"

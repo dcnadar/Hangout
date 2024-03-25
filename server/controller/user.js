@@ -55,10 +55,10 @@ export const addRemoveFriend= async (req,res)=>
         user.friends= user.friends.filter((e)=> e!==friendId);
         friend.friends= friend.friends.filter((e)=> e!==id)
        }
-      //  if(id === friendId)
-      //  {
-      //    return res.send("you cannot follow yourslef")
-      //  }
+       else if(id === friendId)
+       {
+         return res.send("you cannot follow yourslef")
+       }
        // to add the friend in the list of the user so we have to do like this
          else
          {

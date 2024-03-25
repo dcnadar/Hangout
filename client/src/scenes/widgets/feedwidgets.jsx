@@ -31,7 +31,7 @@ const config = {
             }
 
         })()
-     },[ dispatch])
+     },[])
 
 
      
@@ -42,7 +42,7 @@ console.log('this is the all post', posts )
     <div className=' mt-2 ml-3  '>
     {posts.map((e)=>
     {
-        console.log(e)
+
         return (<ShowPostwidget    
 
         key={e._id}
