@@ -4,6 +4,7 @@ import Userwidgets from '../widgets/userwidgets'
 import {  useSelector } from 'react-redux'
 import Postwidget from '../widgets/postwidget'
 import Feedwidgets from '../widgets/feedwidgets'
+import Friendlistwidget from '../widgets/friendlistwidget'
 export default function HomePage() {
 
   const {_id, profilePhoto}= useSelector((state)=> state.user)
@@ -21,7 +22,7 @@ export default function HomePage() {
     <Postwidget userId={_id} profilePhoto={profilePhoto}/>
      <Feedwidgets  userId={_id} />
 </div>
-
+<Friendlistwidget/>
       </section>
     </div>
   )

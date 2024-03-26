@@ -19,13 +19,14 @@ export  const getUserFriends = async (req,res)=>
 {
      try
      {
+             console.log('now the it is in the getuserfriends method')
            const {id}= req.params
            const user= await User.findById(id)
 
-                  const friends =  await Promise.all(User.friends.map((id)=> User.findById(id)))
+                  const friends =  await Promise.all(user.friends.map((id)=> User.findById(id)))
                   console.log('this is the all friend of the user list', friends);
 
-                  const formattedfriend= friend.map(({_id,firstname, lastname,location, profilePicture,occupation})=>{return {_id,firstname, lastname,location, profilePicture,occupation}})
+                  const formattedfriend= friends.map(({_id,firstname, lastname,location, profilePicture,occupation})=>{return {_id,firstname, lastname,location, profilePicture,occupation}})
                   
            
               return res.status(200).json(formattedfriend)
@@ -33,7 +34,7 @@ export  const getUserFriends = async (req,res)=>
      }
      catch(err)
      {
-        console.log('this is the error from the getUserFriends controller')
+        console.log('this is the error from the getUserFriends controller', err)
         res.status(err.status).json(err.message)
      }
 }
