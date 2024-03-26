@@ -8,6 +8,8 @@ export default function Feedwidgets(prop) {
       const dispatch= useDispatch()
       const userId= prop.userId
       const posts= useSelector(state=> state.posts)
+      const friend= useSelector(state=>state.user.friends)
+
 const token= useSelector(state=> state.token)
 console.log('this is the token', token)
 const config = {
@@ -34,10 +36,7 @@ const config = {
      },[])
 
 
-     
 
-
-console.log('this is the all post', posts )
   return (
     <div className=' mt-2 ml-3  '>
     {posts.map((e)=>
