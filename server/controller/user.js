@@ -26,7 +26,7 @@ export  const getUserFriends = async (req,res)=>
                   const friends =  await Promise.all(user.friends.map((id)=> User.findById(id)))
                   console.log('this is the all friend of the user list', friends);
 
-                  const formattedfriend= friends.map(({_id,firstname, lastname,location, profilePicture,occupation})=>{return {_id,firstname, lastname,location, profilePicture,occupation}})
+                  const formattedfriend= friends.map(({_id,firstname, lastname,location, profilePhoto,occupation})=>{return {_id,firstname, lastname,location, profilePhoto,occupation}})
                   
            
               return res.status(200).json(formattedfriend)
@@ -74,7 +74,7 @@ export const addRemoveFriend= async (req,res)=>
          const friendss =  await Promise.all(user.friends.map((id)=> User.findById(id)))
          console.log('this is the all friend of the user list', friendss);
 
-         const formattedfriend= friendss.map(({_id,firstname, lastname,location, profilePicture,occupation})=>{return {_id,firstname, lastname,location, profilePicture,occupation}})
+         const formattedfriend= friendss.map(({_id,firstname, lastname,location, profilePhoto,occupation})=>{return {_id,firstname, lastname,location, profilePhoto,occupation}})
          
   
      return res.status(200).json(formattedfriend)

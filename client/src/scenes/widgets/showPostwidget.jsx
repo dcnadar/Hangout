@@ -26,8 +26,9 @@ useEffect(()=>
 
       
        const response =  await  axios.patch(`http://localhost:3000/users/${user._id}/${userId}`)
-         console.log('this is the response we get', response.data)
+         console.log('this is the response we get show post.js', response.data)
          setisfriend(!isfriend)
+
          await  dispatch(setFriends({friends: response.data}))
          console.log('this is by default isfriend', isfriend)
          console.log('this is after dispatch isfriend', isfriend)
