@@ -1,4 +1,4 @@
-<img width="1273" alt="image" src="https://github.com/justagit07/Hangout/assets/122598221/fe11def8-2d36-46d3-92a9-0bccd6c80768"># Hangout
+# Hangout
 Getting Started
 <img width="1034" alt="image" src="https://github.com/justagit07/Hangout/assets/122598221/ad7aa8f4-0261-4db0-8b5f-24774294d053">
 This is  Landing page first you have to  Login if you are new  user than you have to register
